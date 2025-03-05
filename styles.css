@@ -3,9 +3,9 @@ body {
     margin: 0;
     padding: 0;
     font-family: 'Montserrat', sans-serif;
-    color: #FFFFFF;
     position: relative;
     overflow-x: hidden;
+    background-color: #000000; /* Fallback black background */
 }
 
 canvas {
@@ -13,6 +13,17 @@ canvas {
     top: 0;
     left: 0;
     z-index: -1; /* Background behind content */
+}
+
+/* Color-Changing Animation */
+@keyframes colorChange {
+    0% { color: #D32F2F; } /* Red */
+    50% { color: #000000; } /* Black */
+    100% { color: #D32F2F; } /* Back to Red */
+}
+
+.color-change {
+    animation: colorChange 3s infinite; /* 3-second loop */
 }
 
 /* Header */
@@ -34,7 +45,6 @@ nav {
 nav h1 {
     margin: 0;
     font-size: 2em;
-    color: #FFFFFF;
 }
 
 nav ul {
@@ -49,14 +59,8 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #FFFFFF;
     text-decoration: none;
     font-weight: bold;
-    transition: color 0.3s ease;
-}
-
-nav ul li a:hover {
-    color: #000000; /* Black on hover */
 }
 
 /* Sections */
@@ -72,7 +76,7 @@ section {
 }
 
 h2, h3 {
-    color: #D32F2F; /* Red */
+    /* Color handled by .color-change */
 }
 
 h2 {
@@ -97,7 +101,7 @@ h3 {
 }
 
 .certification {
-    background-color: #333333;
+    background-color: #000000;
     padding: 20px;
     border-radius: 5px;
     transition: transform 0.3s ease;
@@ -108,23 +112,32 @@ h3 {
 }
 
 .certification h4 {
-    color: #D32F2F;
     margin-top: 0;
 }
 
-/* Button */
-.btn {
-    display: inline-block;
-    background-color: #D32F2F;
-    color: #FFFFFF;
-    padding: 10px 20px;
-    text-decoration: none;
+.cert-image {
+    max-width: 100%;
+    height: auto;
+    border: 2px solid #D32F2F; /* Red border */
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    box-shadow: 0 4px 8px rgba(211, 47, 47, 0.5); /* Subtle shadow for depth */
 }
 
-.btn:hover {
-    background-color: #B71C1C; /* Darker red */
+.emblem {
+    margin-top: 10px;
+    font-size: 2em; /* Size of icons */
+    text-align: center;
+}
+
+.emblem i {
+    color: #D32F2F; /* Red icons */
+    margin: 0 5px; /* Spacing between multiple icons (e.g., HTML & CSS) */
+}
+
+/* Contact Section Links */
+#contact a {
+    text-decoration: none;
 }
 
 /* Footer */

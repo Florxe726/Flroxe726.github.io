@@ -6,6 +6,8 @@
     <title>Clark Keith - Portfolio</title>
     <link href="styles.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for language icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <!-- Interactive Background Canvas -->
@@ -14,59 +16,71 @@
     <!-- Header -->
     <header>
         <nav>
-            <h1>Clark Keith</h1>
+            <h1 class="color-change">Keith Clark Randolph</h1> <!-- Updated to match certificate name -->
             <ul>
-                <li><a href="#about">About Me</a></li>
-                <li><a href="#certifications">Certifications</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#about" class="color-change">About Me</a></li>
+                <li><a href="#certifications" class="color-change">Certifications</a></li>
+                <li><a href="#contact" class="color-change">Contact</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Hero Section -->
     <section id="hero">
-        <h2>Hello, I'm Clark Keith</h2>
-        <p>I am a Student in Software and App Design</p>
+        <h2 class="color-change">Hello, I'm Keith Clark Randolph</h2> <!-- Updated to match certificate name -->
+        <p class="color-change">I am a Student in Software and App Design</p>
     </section>
 
     <!-- About Section -->
     <section id="about">
-        <h3>About Me</h3>
+        <h3 class="color-change">About Me</h3>
         <p>I'm a Student in Software and App Design with experience in SQL Databases, Python, HTML, and CSS. I specialize in web development and app design, and I’m passionate about programming, basketball, and culinary arts.</p>
     </section>
 
     <!-- Certifications Section -->
     <section id="certifications">
-        <h3>Certifications</h3>
+        <h3 class="color-change">Certifications</h3>
         <div class="certification-grid">
             <div class="certification">
-                <h4>Python Certification</h4>
-                <p>Completed a comprehensive course in Python programming on November 13.</p>
-                <a href="file:///C:/Users/ckeit023/Downloads/ClarkK_Python_Nov13.pdf" class="btn">View Certification</a>
+                <h4 class="color-change">Python Certification</h4>
+                <p>Completed a comprehensive course in Python programming on November 13, 2024.</p>
+                <img src="images/ClarkK_Python_Nov13.jpg" alt="Python Certification" class="cert-image">
+                <div class="emblem">
+                    <i class="fab fa-python"></i> <!-- Python Icon -->
+                </div>
             </div>
             <div class="certification">
-                <h4>HTML & CSS Certification</h4>
-                <p>Mastered web development fundamentals with HTML and CSS on December 17.</p>
-                <a href="file:///C:/Users/ckeit023/Downloads/ClarkK_HTML&CSS_Dec17.pdf" class="btn">View Certification</a>
+                <h4 class="color-change">HTML & CSS Certification</h4>
+                <p>Mastered web development fundamentals with HTML and CSS on December 17, 2024.</p>
+                <img src="images/ClarkK_HTML&CSS_Dec17.jpg" alt="HTML & CSS Certification" class="cert-image">
+                <div class="emblem">
+                    <i class="fab fa-html5"></i> <!-- HTML Icon -->
+                    <i class="fab fa-css3-alt"></i> <!-- CSS Icon -->
+                </div>
             </div>
             <div class="certification">
-                <h4>Databases Certification</h4>
-                <p>Gained expertise in SQL and database management on February 14.</p>
-                <a href="file:///C:/Users/ckeit023/Downloads/ClarkK_Databases_Feb14.pdf" class="btn">View Certification</a>
+                <h4 class="color-change">Databases Certification</h4>
+                <p>Gained expertise in SQL and database management on February 14, 2025.</p>
+                <img src="images/ClarkK_Databases_Feb14.jpg" alt="Databases Certification" class="cert-image">
+                <div class="emblem">
+                    <i class="fas fa-database"></i> <!-- SQL/Database Icon -->
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
     <section id="contact">
-        <h3>Contact</h3>
-        <p>Email: <a href="mailto:clarkkeith18@gmail.com">clarkkeith18@gmail.com</a></p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/clark-keith-261a0b345/">Clark Keith LinkedIn</a></p>
+        <h3 class="color-change">Contact</h3>
+        <p>Email: <a href="mailto:clarkkeith18@gmail.com" class="color-change">clarkkeith18@gmail.com</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/clark-keith-261a0b345/" class="color-change">Keith Clark Randolph LinkedIn</a></p> <!-- Updated to match certificate name -->
+        <p>Codewars: <a href="https://www.codewars.com/users/Florxe726" class="color-change">Florxe726</a></p>
+        <p>GitHub: <a href="https://github.com/" class="color-change">Keith Clark Randolph GitHub</a></p> <!-- Replace with your GitHub URL -->
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>© 2025 Clark Keith. All rights reserved.</p>
+        <p class="color-change">© 2025 Keith Clark Randolph. All rights reserved.</p> <!-- Updated to match certificate name -->
     </footer>
 
     <!-- JavaScript for Interactive Background -->
@@ -98,7 +112,7 @@
                 this.size = Math.random() * 5 + 1;
                 this.speedX = Math.random() * 3 - 1.5;
                 this.speedY = Math.random() * 3 - 1.5;
-                this.color = Math.random() > 0.5 ? '#D32F2F' : '#000000';
+                this.color = '#D32F2F'; // All particles red
             }
             update() {
                 this.x += this.speedX;
@@ -139,7 +153,8 @@
         }
 
         function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#000000'; // Black background
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
             for (let i = 0; i < particlesArray.length; i++) {
                 particlesArray[i].update();
                 particlesArray[i].draw();
