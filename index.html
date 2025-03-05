@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clark Keith - Portfolio</title>
-    <link  href="styles.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Interactive Background Canvas -->
+    <canvas id="canvas"></canvas>
+
     <!-- Header -->
     <header>
         <nav>
             <h1>Clark Keith</h1>
             <ul>
-                <li><a href="#about">About me</a></li>
-                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#certifications">Certifications</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -21,29 +25,34 @@
 
     <!-- Hero Section -->
     <section id="hero">
-        <h2>Hello, I'm  Clark Keith</h2>
+        <h2>Hello, I'm Clark Keith</h2>
         <p>I am a Student in Software and App Design</p>
     </section>
 
     <!-- About Section -->
     <section id="about">
         <h3>About Me</h3>
-        <p>I'm a Student in Software and App Design with experience in your skills or expertise Sql Databases, Python, Html and Css. I specialize in specific focus, e.g., web development, design, etc., and I’m passionate about Progamming, Basketball, Culinary.</p>
+        <p>I'm a Student in Software and App Design with experience in SQL Databases, Python, HTML, and CSS. I specialize in web development and app design, and I’m passionate about programming, basketball, and culinary arts.</p>
     </section>
 
-    <!-- Projects Section -->
-    <section id="Certifications">
-        <h3>Projects</h3>
-        <div class="project-grid">
-            <div class="Certification">
-                <h4>Certification 1</h4>
-                <p>A brief description of your first Certification.</p>
-                <a href="#" class="btn">View Project</a>
+    <!-- Certifications Section -->
+    <section id="certifications">
+        <h3>Certifications</h3>
+        <div class="certification-grid">
+            <div class="certification">
+                <h4>Python Certification</h4>
+                <p>Completed a comprehensive course in Python programming on November 13.</p>
+                <a href="file:///C:/Users/ckeit023/Downloads/ClarkK_Python_Nov13.pdf" class="btn">View Certification</a>
             </div>
-            <div class="project">
-                <h4>Project 2</h4>
-                <p>A brief description of your second project.</p>
-                <a href="#" class="btn">View Project</a>
+            <div class="certification">
+                <h4>HTML & CSS Certification</h4>
+                <p>Mastered web development fundamentals with HTML and CSS on December 17.</p>
+                <a href="file:///C:/Users/ckeit023/Downloads/ClarkK_HTML&CSS_Dec17.pdf" class="btn">View Certification</a>
+            </div>
+            <div class="certification">
+                <h4>Databases Certification</h4>
+                <p>Gained expertise in SQL and database management on February 14.</p>
+                <a href="file:///C:/Users/ckeit023/Downloads/ClarkK_Databases_Feb14.pdf" class="btn">View Certification</a>
             </div>
         </div>
     </section>
@@ -52,12 +61,100 @@
     <section id="contact">
         <h3>Contact</h3>
         <p>Email: <a href="mailto:clarkkeith18@gmail.com">clarkkeith18@gmail.com</a></p>
-        <p>LinkedIn: <a href="#">Your LinkedIn</a></p>
+        <p>LinkedIn: <a href="https://www.linkedin.com/in/clark-keith-261a0b345/">Clark Keith LinkedIn</a></p>
     </section>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Your Name. All rights reserved.</p>
+        <p>© 2025 Clark Keith. All rights reserved.</p>
     </footer>
+
+    <!-- JavaScript for Interactive Background -->
+    <script>
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particlesArray = [];
+        const numberOfParticles = 100;
+
+        let mouse = {
+            x: null,
+            y: null,
+            radius: 150
+        };
+
+        window.addEventListener('mousemove', function(event) {
+            mouse.x = event.x;
+            mouse.y = event.y;
+        });
+
+        class Particle {
+            constructor(x, y) {
+                this.x = x;
+                this.y = y;
+                this.size = Math.random() * 5 + 1;
+                this.speedX = Math.random() * 3 - 1.5;
+                this.speedY = Math.random() * 3 - 1.5;
+                this.color = Math.random() > 0.5 ? '#D32F2F' : '#000000';
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x + this.size > canvas.width || this.x - this.size < 0) {
+                    this.speedX = -this.speedX;
+                }
+                if (this.y + this.size > canvas.height || this.y - this.size < 0) {
+                    this.speedY = -this.speedY;
+                }
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    let forceDirectionX = dx / distance;
+                    let forceDirectionY = dy / distance;
+                    let maxDistance = mouse.radius;
+                    let force = (maxDistance - distance) / maxDistance;
+                    this.speedX -= forceDirectionX * force * 2;
+                    this.speedY -= forceDirectionY * force * 2;
+                }
+            }
+            draw() {
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            particlesArray = [];
+            for (let i = 0; i < numberOfParticles; i++) {
+                let x = Math.random() * canvas.width;
+                let y = Math.random() * canvas.height;
+                particlesArray.push(new Particle(x, y));
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+
+        window.addEventListener('resize', function() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+    </script>
 </body>
 </html>
